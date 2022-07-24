@@ -69,6 +69,7 @@ func (h handlers) SpotifyCallbackHandler(w http.ResponseWriter, r *http.Request)
 		h.writeResponse(w, appError.Error(), appError.Status())
 	}
 	slackAccessToken, err := r.Cookie("slack_access_token")
+	println("Slack Access Token", slackAccessToken)
 	if err != nil {
 		fmt.Println(err)
 		appError := app_error.InvalidCookie
@@ -76,6 +77,7 @@ func (h handlers) SpotifyCallbackHandler(w http.ResponseWriter, r *http.Request)
 	}
 
 	spotifyToken, err := h.spotifyAuthenticator.Token(h.spotifyState, r)
+	println(spotifyToken)
 	if err != nil {
 		fmt.Println(err)
 		appError := app_error.InvalidSpotifyAuthCode
@@ -94,8 +96,9 @@ func (h handlers) SpotifyCallbackHandler(w http.ResponseWriter, r *http.Request)
 }
 
 func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
-	println("Slack URL", r.URL.Query())
-	println("Slack Credentials", h.slackClientID, h.slackClientSecret)
+	println("Slack URL Code", r.URL.Query().Get("code"))
+	println("Slack Client ID", h.slackClientID)
+	println("Slack Client Secret", h.slackClientSecret)
 	println("Slack Auth URL", h.slackAuthURL)
 
 	slackCode := r.URL.Query().Get("code")
@@ -150,6 +153,7 @@ func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &cookieSlack)
 
 	spotifyAuthURL := h.spotifyAuthenticator.AuthURL(h.spotifyState)
+	println("Spotify Auth URL", spotifyAuthURL)
 
 	http.Redirect(w, r, spotifyAuthURL, http.StatusSeeOther)
 }
