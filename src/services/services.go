@@ -42,6 +42,7 @@ func (s services) ChangeUserStatus(ctx context.Context) error {
 
 	for _, user := range users {
 		go func(user domain.User) {
+			println("User => ", user.ID)
 			slackApi := slack.New(user.SlackAccessToken)
 
 			spotifyToken := oauth2.Token{
@@ -76,13 +77,16 @@ func (s services) ChangeUserStatus(ctx context.Context) error {
 
 			if canUpdateStatus {
 				songName := player.Item.Name
+				println("Song name => ", songName)
 				slackStatus := songName + " - " + player.Item.Artists[0].Name
+				println("Slack Status => ", slackStatus)
 				if len(slackStatus) > 100 {
 					extraChars := len(slackStatus) - 100 + 3
 					songName = player.Item.Name[:len(player.Item.Name)-extraChars]
 					slackStatus = songName + "... - " + player.Item.Artists[0].Name
 				}
 
+				println("Slack User ID => ", user.SlackUserID)
 				err = slackApi.SetUserCustomStatusWithUser(user.SlackUserID, slackStatus, ":spotify:", 0)
 				if err != nil {
 					fmt.Printf("Error slack set user custom status: %s\n", err)

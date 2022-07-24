@@ -63,13 +63,14 @@ func (h handlers) SpotifyCallbackHandler(w http.ResponseWriter, r *http.Request)
 	ctx := r.Context()
 
 	userID, err := r.Cookie("user_id")
+	println("User ID => ", userID.Value)
 	if err != nil {
 		fmt.Println(err)
 		appError := app_error.InvalidCookie
 		h.writeResponse(w, appError.Error(), appError.Status())
 	}
 	slackAccessToken, err := r.Cookie("slack_access_token")
-	println("Slack Access Token", slackAccessToken)
+	println("Slack Access Token", slackAccessToken.Value)
 	if err != nil {
 		fmt.Println(err)
 		appError := app_error.InvalidCookie
@@ -77,7 +78,7 @@ func (h handlers) SpotifyCallbackHandler(w http.ResponseWriter, r *http.Request)
 	}
 
 	spotifyToken, err := h.spotifyAuthenticator.Token(h.spotifyState, r)
-	println(spotifyToken)
+	println("Spotify Token => ", spotifyToken.AccessToken)
 	if err != nil {
 		fmt.Println(err)
 		appError := app_error.InvalidSpotifyAuthCode
