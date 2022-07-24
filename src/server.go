@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/DevKenny/slack-spotify/src/handlers"
 	"github.com/newrelic/go-agent/v3/newrelic"
 	"github.com/robfig/cron/v3"
 	"github.com/zmb3/spotify"
 	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
 	"slack-spotify/src/handlers"
 	"slack-spotify/src/repositories"
 	"slack-spotify/src/repositories/db_entities"

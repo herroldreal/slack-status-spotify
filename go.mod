@@ -1,4 +1,4 @@
-module slack-spotify
+module github.com/DevKenny/slack-spotify
 
 go 1.13
 

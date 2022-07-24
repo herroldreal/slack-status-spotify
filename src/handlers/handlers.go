@@ -94,6 +94,10 @@ func (h handlers) SpotifyCallbackHandler(w http.ResponseWriter, r *http.Request)
 }
 
 func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
+	println("Slack URL", r.URL.Query())
+	println("Slack Credentials", h.slackClientID, h.slackClientSecret)
+	println("Slack Auth URL", h.slackAuthURL)
+	
 	slackCode := r.URL.Query().Get("code")
 
 	requestBody := url.Values{}
