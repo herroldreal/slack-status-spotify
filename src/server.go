@@ -74,6 +74,12 @@ func main() {
 
 func stateGenerator() string {
 	b := make([]byte, 4)
-	rand.Read(b)
-	return fmt.Sprintf("%x", b)
+	i, err := rand.Read(b)
+	if err != nil {
+		return "0"
+	}
+	state := fmt.Sprintf("%x", b)
+	println("Spotify State random => ", i)
+	println("Spotify State => ", state)
+	return state
 }

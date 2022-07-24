@@ -149,6 +149,7 @@ func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	expiration := time.Now().Add(1 * time.Hour)
 	cookieUser := http.Cookie{Name: "user_id", Value: slackAuthResponse.AuthedUser.Id, Expires: expiration}
 	cookieSlack := http.Cookie{Name: "slack_access_token", Value: slackAuthResponse.AuthedUser.AccessToken, Expires: expiration}
+	println("Slack Access Token => ", slackAuthResponse.AuthedUser.AccessToken)
 	http.SetCookie(w, &cookieUser)
 	http.SetCookie(w, &cookieSlack)
 
