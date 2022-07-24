@@ -3,10 +3,10 @@ package repositories
 import (
 	"context"
 
+	"github.com/DevKenny/slack-spotify/src/app_error"
+	"github.com/DevKenny/slack-spotify/src/domain"
+	"github.com/DevKenny/slack-spotify/src/repositories/db_entities"
 	"gorm.io/gorm"
-	"slack-spotify/src/app_error"
-	"slack-spotify/src/domain"
-	"slack-spotify/src/repositories/db_entities"
 )
 
 type repositories struct {

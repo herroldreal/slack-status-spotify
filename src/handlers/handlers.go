@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/DevKenny/slack-spotify/src/app_error"
+	"github.com/DevKenny/slack-spotify/src/domain"
+	"github.com/DevKenny/slack-spotify/src/services"
 	"github.com/zmb3/spotify"
-	"slack-spotify/src/app_error"
-	"slack-spotify/src/domain"
-	"slack-spotify/src/services"
 )
 
 type handlers struct {
@@ -97,7 +97,7 @@ func (h handlers) SlackCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	println("Slack URL", r.URL.Query())
 	println("Slack Credentials", h.slackClientID, h.slackClientSecret)
 	println("Slack Auth URL", h.slackAuthURL)
-	
+
 	slackCode := r.URL.Query().Get("code")
 
 	requestBody := url.Values{}

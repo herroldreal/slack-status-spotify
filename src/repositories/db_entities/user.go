@@ -3,8 +3,8 @@ package db_entities
 import (
 	"time"
 
+	"github.com/DevKenny/slack-spotify/src/domain"
 	"gorm.io/gorm"
-	"slack-spotify/src/domain"
 )
 
 type User struct {

@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/DevKenny/slack-spotify/src/domain"
+	"github.com/DevKenny/slack-spotify/src/repositories"
 	"github.com/google/uuid"
 	"github.com/slack-go/slack"
 	"github.com/zmb3/spotify"
 	"golang.org/x/oauth2"
-	"slack-spotify/src/domain"
-	"slack-spotify/src/repositories"
 )
 
 type services struct {

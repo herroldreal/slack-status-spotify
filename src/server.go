@@ -4,18 +4,18 @@ import (
 	"context"
 	"crypto/rand"
 	"fmt"
+	"gorm.io/gorm"
 	"net/http"
 	"os"
 
 	"github.com/DevKenny/slack-spotify/src/handlers"
+	"github.com/DevKenny/slack-spotify/src/repositories"
+	"github.com/DevKenny/slack-spotify/src/repositories/db_entities"
+	"github.com/DevKenny/slack-spotify/src/services"
 	"github.com/newrelic/go-agent/v3/newrelic"
 	"github.com/robfig/cron/v3"
 	"github.com/zmb3/spotify"
 	"gorm.io/driver/postgres"
-	"slack-spotify/src/handlers"
-	"slack-spotify/src/repositories"
-	"slack-spotify/src/repositories/db_entities"
-	"slack-spotify/src/services"
 )
 
 func main() {
